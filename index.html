@@ -1,0 +1,121 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<title>The Cook's Book</title>
+<head>
+<meta name="viewport" content="width=device-width, 
+    user-scalable=no, initial-scale=1, maximum-scale=1, user-scalable=0" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<link rel="stylesheet" type="text/css" href="styles.css"> 
+<script
+  src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+  integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
+  crossorigin="anonymous"></script>
+<style type="text/css">
+</style>
+
+</head>
+
+<body class="noselect">
+<div id="menu">
+	<div id="start-menu">
+		<img 
+			src="img/buttons/start-button.png" 
+			id="start-button" 
+			class="pulse"
+			onclick="startGame();"></img>
+	</div>
+</div>
+<div id="game-container">
+	<div id="game-background">
+	</div>
+
+	<div id="side-menu">
+		<div id="top" class="menu-section">
+			<div id="item-box">
+				Timer:<br/>
+				<div id="timer-count">0</div>
+				<div 
+					id="start-timer-button"
+					onclick="startTimerButton();"
+					>START</div>
+				<div 
+					id="stop-timer-button"
+					onclick="stopTimer();"
+					>STOP</div>
+			</div>
+			<div id="item-details">
+				<div 
+					class="button"
+					id="show-recipe-button"
+					onclick="showRecipe();">Show Recipe
+				</div>
+			</div>
+		</div>
+		<div id="mid" class="menu-section">
+			<div id="recipe-list">
+				<div id="recipe-list-title">Choose a Recipe:</div>
+				<div onclick="showRecipe();" class="recipe-list-item">Mac and Cheese</div>
+			</div>
+			<div id="recipe-steps">
+				<div id="recipe-list-title">Mac and Cheese</div>
+				1. Boil water (10 seconds)<br/>
+				2. Add pasta<br/>
+				4. Add butter (1 unit)<br/>
+				5. Add cheese (3 units)<br/>
+				6. Add milk<br/><br/>
+				<div 
+					id="hide-recipe-button" 
+					class="button"
+					onclick="hideRecipe()">HIDE</div>
+			</div>
+			<div id="inv-screen">
+				<div class="inv-box">
+					<div id="milk">Milk</div>
+					<div id="milk-button" class="square-add-button"
+						onclick="incrementMilk();">+</div>
+				</div>
+				<div class="inv-box">
+					<div id="water">Water</div>
+					<div id="boil-button"
+						onclick="boilWater();">Stove Off</div>
+				</div>
+				<div class="inv-box">
+					<div id="pasta">Pasta</div>
+					<div id="pasta-button" class="square-add-button"
+						onclick="incrementPasta();">+</div>
+				</div>
+				<div class="inv-box">
+					Butter
+					<div id="num-butter">0</div>
+
+					<div class="square-add-button"
+						onclick="addUnit('butter');">+</div>
+					<div class="square-minus-button"
+						onclick="minusUnit('butter');">-</div>
+				</div>
+				<div class="inv-box">
+					Cheese
+					<div id="num-cheese">0</div>
+
+					<div class="square-add-button"
+						onclick="addUnit('cheese');">+</div>
+					<div class="square-minus-button"
+						onclick="minusUnit('cheese');">-</div>
+				</div>
+				<div class="inv-box" 
+					style="background-color:#c73946;"
+					onclick="validate();">
+					TASTE <br/> TEST<br/> -->
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="level-screen">
+	Level Complete!
+</div>
+<script src="scripts.js"></script>
+
+</body>
+</html>

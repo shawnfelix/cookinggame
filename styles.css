@@ -1,0 +1,274 @@
+@font-face {
+	font-family: PixelFont;
+	src: url("pixel-font.ttf");
+}
+canvas {display:none; z-index:10;}
+body {
+	font-family: PixelFont;
+	font-size: 20px;
+	background: #000;
+	width: 100%;
+	margin: 0;
+    height: 100%;
+    position: absolute;
+}
+
+#level-screen {
+	width:100%;
+	height:100%;
+	background-color:#c73946;
+	display: none;
+	text-align:center;
+	padding-top:40%;
+	font-size: 28px;
+	position:absolute;
+	z-index:30;
+}
+#menu {
+	position:absolute;
+	width:100%;
+	height:100%;
+}
+
+#start-menu {
+	z-index:1000;
+	position:absolute;
+	background: url('img/title-page.png') no-repeat center center fixed;
+	/*background-size:contain;*/
+	background-color:#00549f;
+	opacity:0;
+	width:100%;
+	height:100%;
+}
+#start-button {
+	margin:0 auto;
+	display:block;
+	width: 100px;
+  	height: auto;
+  	padding-top: 195px;
+}
+
+
+
+#game-container {
+	display:none;
+	z-index:10;
+	max-width: 960px;
+	max-height: 540px;
+
+	min-width:640px;
+	min-height:360px;
+
+	position:absolute; /*it can be fixed too*/
+    left:0; right:0;
+    top:0; bottom:0;
+    margin:auto;
+}
+#recipe-list {
+
+	left: 0;
+}
+#game-background {
+	display:inline-block;
+	width:59%;
+	height:100%;
+	background-image: url(img/gamebg.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    cursor:pointer;
+}
+
+.button{
+	padding:10px;
+	background:red;
+	max-width:160px;
+	text-align:center;
+	border-radius:10px;
+	cursor:pointer;
+}
+.button:hover {
+	background:darkred;
+}
+
+.noselect {
+	user-select: none; 
+}
+
+/** SIDE MENU STUFF ***************************/
+#side-menu {
+	display:inline-block;
+	height:100%;
+	width:40%;
+	background:#00549f;
+	vertical-align:top;
+	border-radius: 8px;
+}
+.menu-section {
+	height:33%;
+	width:100%;
+}
+#item-box {
+	height:100%;
+	width:50%;
+	background: #95c1cc;
+    border-bottom-right-radius: 15px;
+}
+
+#recipe-details {
+	display:none;
+}
+#recipe-list-title{
+	padding:10px;
+	text-align:center;
+}
+.recipe-list-item {
+	color:#c99c59;
+	background:#023e73;
+	text-align:center;
+	padding:20px;
+}
+.recipe-list-item:hover {
+	background:#022849;
+	cursor:pointer;
+}
+#recipe-steps{
+	display:none;
+}
+#hide-recipe-button {
+	margin:0 auto;
+}
+#show-recipe-button {
+	font-size: 19px;
+	margin-top:5px;
+}
+#top {
+	display:none;
+}
+#top > * {
+	display:inline-block;
+	vertical-align: top;
+}
+#timer-count{
+	text-align:center;
+	padding:20px;
+}
+#start-timer-button{
+	width:90px;
+	padding:4px;
+	border-radius:5px;
+	background-color:green;
+	display:inline-block;
+	cursor:pointer;
+}
+#start-timer-button:hover{
+	background-color:darkgreen;
+}
+#stop-timer-button {
+	background-color:red;
+	width:70px;
+	padding: 4px;
+	border-radius:5px;
+	display:inline-block;
+	cursor:pointer;
+}
+
+#boil-button{
+	width:70px;
+	border-radius: 9px;
+	margin: 10px auto 0;
+	font-size:13px;
+	background-color:#c99c59;
+}
+.square-add-button{
+	width:40px;
+	height:40px;
+	margin:2px;
+	font-size:22px;
+	border-radius:22px;
+	display:inline-block;
+	background-color:green;
+
+}
+.square-add-button:hover{
+	background-color:darkgreen;
+}
+.square-minus-button{
+	width:40px;
+	height:40px;
+	margin:2px;
+	font-size:22px;
+	border-radius:22px;
+	display:inline-block;
+	background-color:red;
+
+}
+.square-minus-button:hover{
+	background-color:darkred;
+}
+
+.inv-box{
+	width:27%;
+	margin:1%;
+	height:120px;
+	border:3px solid black;
+	text-align:center;
+	background-color: #014179;
+	border-radius: 8px;
+	cursor:pointer;
+	display:inline-block;
+	vertical-align:top;
+}
+.inv-box:hover {
+	background-color: #023866;
+}
+
+/* ANIMATIONS ***************************************************/
+.fadeIn {
+	-webkit-animation: fadein .6s ease-in;
+    -moz-animation: fadein .6s ease-in;
+    animation: fadein .6s ease-in;
+
+    visibility: visible !important;		
+	-webkit-backface-visibility: hidden;
+	-webkit-animation-fill-mode: forwards;
+	animation-fill-mode: forwards;	
+}
+
+@keyframes fadein {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.fadeOut {
+	-webkit-animation: fadeout .6s ease-in;
+    -moz-animation: fadeout .6s ease-in;
+    animation: fadeout .6s ease-in;
+
+    visibility: visible !important;		
+	-webkit-backface-visibility: hidden;
+	-webkit-animation-fill-mode: forwards;
+	animation-fill-mode: forwards;	
+}
+
+@keyframes fadeout {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+@keyframes pulse {
+  from {
+    transform: scale3d(1, 1, 1);
+  }
+
+  50% {
+    transform: scale3d(1.05, 1.05, 1.05);
+  }
+
+  to {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.pulse {
+  animation: pulse 1s ease-in infinite;
+}
