@@ -53,15 +53,28 @@ var game = {
 		game.timer = [];
 		game.timer.active = false;
 		game.timer.value = 0;
-		game.boiling = false;
+		game.boil = 0;
+		game.boiled = false;
 		game.timerStarted = false;
 		game.stove = false;
 		game.sink = false;
+		game.valid = 0;
+		game.amounts =[];
+		game.amounts.cups = 0;
+		game.amounts.tsp = 0;
+		game.amounts.tbs = 0;
+		game.amounts.oz = 0;
+
 		displayRecipeDetails();
 		displayRecipesList();
 	},
 
-
+	isBoiling: function(){
+		if(game.boiling > 10){
+			return true;
+		}
+		return false;
+	},
 
 
 	updateCurrItem: function(currItem){
@@ -85,6 +98,7 @@ function loadRecipeGame(){
 	$("#top").show();
 	$("#recipe-list").hide();
 	$("#inv-screen").show();
+	$("#button-bar").show();
 }
 
 function showRecipe(){
@@ -177,6 +191,7 @@ function toggleStove(){
 		$('#stove').html("Off")
 			.addClass("darkred")
 			.removeClass("green");
+		decayBoil();
 	}
 }
 //SINK
@@ -212,15 +227,5 @@ function boilWater(){
 }
 
 function validate(){
-	if(game.selectedRecipe.Water == 10 &&
-		game.selectedRecipe.Butter == 1 &&
-		game.selectedRecipe.Pasta == 1 &&
-		game.selectedRecipe.Cheese == 3 &&
-		game.selectedRecipe.Milk == 1){
 		$("#level-screen").show();
-		$("#level-screen").html("Level Complete!");
-	} else{
-		$("#level-screen").show();
-		$("#level-message").html("Failed- Try your recipe again");
-	}
 }

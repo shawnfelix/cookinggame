@@ -30,7 +30,7 @@
 			<div id="stove-boil" style="display:none;"></div>
 			<div id="sink-water" style="display:none;"></div>
 		</div>
-		<div id="button-bar">
+		<div id="button-bar" style="display:none;">
 			<div class="inline field-wrapper">
 				<div>Stove</div>
 				<div id="stove" class="button darkred"
@@ -44,11 +44,20 @@
 			<div id="water-level-container">
 				Water:
 				<div id="water-level" class="waterlevelmeter">
-					<div id="water-level-color">
+					<div id="water-level-color" class="level-color">
 					</div>
 				</div>
 			</div>
-			<div id="boiled-indicator">!</div>
+			<div id="water-level-container" style="margin-right:20px;">
+				Boil:
+				<div id="water-level" class="waterlevelmeter">
+					<div id="boil-level-color" class="level-color">
+					<div id="boil-excl" 
+						style="display:none;"
+						>!</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 	</div>
@@ -79,14 +88,26 @@
 			<div id="recipe-list">
 				<div id="recipe-list-title">Choose a Recipe:</div>
 				<div onclick="loadRecipeGame();" class="recipe-list-item">Mac and Cheese</div>
+				<div class="recipe-list-item" style="cursor:initial">
+					<div id="lock"></div>
+				</div>
+				<div class="recipe-list-item" style="cursor:initial">
+					<div id="lock"></div>
+				</div>
+				<div class="recipe-list-item" style="cursor:initial">
+					<div id="lock"></div>
+				</div>
+				<div class="recipe-list-item" style="cursor:initial">
+					<div id="lock"></div>
+				</div>
 			</div>
 			<div id="recipe-steps" style="display:none;">
 				<div id="recipe-list-title">Mac and Cheese</div>
 				1. Boil water (10 seconds)<br/>
-				2. Add pasta<br/>
-				4. Add butter (1 unit)<br/>
-				5. Add cheese (3 units)<br/>
-				6. Add milk<br/><br/>
+				2. Add pasta 1 cup<br/>
+				4. Add butter 4 tbs<br/>
+				5. Add cheese 1 cup<br/>
+				6. Add milk 1 1/4 cup<br/><br/>
 				<div 
 					id="hide-recipe-button" 
 					class="button"
@@ -95,31 +116,27 @@
 			<div id="inv-screen" style="display:none;">
 				<div class="inv-box">
 					<div id="milk">Milk</div>
-					<div id="milk-button" class="square-add-button"
-						onclick="incrementMilk();">+</div>
+					<div id="milk-button" 
+						class="square-add-button" style="display:none;"
+						onclick="showAmountsMenu('Milk')"
+						>+</div>
 				</div>
 				<div class="inv-box">
 					<div id="pasta">Pasta</div>
-					<div id="pasta-button" class="square-add-button"
+					<div id="pasta-button" class="square-add-button" style="display:none;"
 						onclick="incrementPasta();">+</div>
 				</div>
 				<div class="inv-box">
 					Butter
-					<div id="num-butter">0</div>
-
-					<div class="square-add-button"
-						onclick="addUnit('butter');">+</div>
-					<div class="square-minus-button"
-						onclick="minusUnit('butter');">-</div>
+					<div class="square-add-button" 
+						style="display:none;"
+						onclick="$(this).hide();">+</div>
 				</div>
 				<div class="inv-box">
 					Cheese
-					<div id="num-cheese">0</div>
-
 					<div class="square-add-button"
-						onclick="addUnit('cheese');">+</div>
-					<div class="square-minus-button"
-						onclick="minusUnit('cheese');">-</div>
+					 	style="display:none;"	
+						onclick="$(this).hide();">+</div>
 				</div>
 				<div class="inv-box" 
 					style="background-color:#c73946;"
@@ -127,13 +144,48 @@
 					TASTE <br/> TEST<br/> -->
 				</div>
 			</div>
+
+			<div id="amounts-menu" style="display:none;">
+				<div id="amounts-header"></div>
+				<div class="inv-box">
+					<div class="inv-box-header">Table<br></br>spoon</div>
+					<div id="num-tbs">0</div>
+					<div class="square-add-button"
+						onclick="addUnitMeasure('tbs');">+</div>
+					<div class="square-minus-button"
+						onclick="minusUnitMeasure('tbs');">-</div>
+				</div>
+
+				<div class="inv-box">
+					<div class="inv-box-header">Tea<br></br>spoon</div>
+					<div id="num-tsp">0</div>
+					<div class="square-add-button"
+						onclick="addUnitMeasure('tsp');">+</div>
+					<div class="square-minus-button"
+						onclick="minusUnitMeasure('tsp');">-</div>
+				</div>
+
+				<div class="inv-box">
+					<div class="inv-box-header">Ounces</div>
+					<div id="num-oz">0</div>
+					<div class="square-add-button"
+						onclick="addUnitMeasure('oz');">+</div>
+					<div class="square-minus-button"
+						onclick="minusUnitMeasure('oz');">-</div>
+				</div>
+				<div class="inv-box" id="submit-amounts"
+					style="background-color:#c73946;"
+					onclick="submitAmountsMenu();">
+					SUBMIT -->
+				</div>
+				<div class="inv-box" id="submit-amounts-res" style="font-size:15px;">Result:
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
 <div id="level-screen">
 	<div id="level-message">Level Complete!</div>
-	<div id="try-again-button" class="button" onclick="$('#level-screen').show();">
-	Try Again
 	</div>
 </div>
 <script src="scripts.js"></script>
