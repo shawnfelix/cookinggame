@@ -50,10 +50,13 @@ var game = {
 		game.inv = [];
 		game.currItem = null;
 		game.selectedRecipe = lks.getRecipe(MAC_AND_CHEESE);
-		game.stopTimer = false;
-		game.stopBoiling = false;
+		game.timer = [];
+		game.timer.active = false;
+		game.timer.value = 0;
+		game.boiling = false;
 		game.timerStarted = false;
-		game.timer = 0;
+		game.stove = false;
+		game.sink = false;
 		displayRecipeDetails();
 		displayRecipesList();
 	},
@@ -75,20 +78,25 @@ function displayRecipesList(){
 }
 
 function displayRecipeDetails(recipeName){
-	for (var name in lks.getRecipe(MAC_AND_CHEESE)) {
-		$("#recipe-details").show();
-		
-	}
+
+}
+
+function loadRecipeGame(){
+	$("#top").show();
+	$("#recipe-list").hide();
+	$("#inv-screen").show();
 }
 
 function showRecipe(){
 	$("#recipe-steps").show();
 	$("#recipe-list").hide();
 	$("#top").show();
+	$("#inv-screen").hide();
 }
 
 function hideRecipe(){
 	$("#recipe-steps").hide();
+	$("#inv-screen").show();
 }
 function startTimerButton(){
 	if(!game.timerStarted){
@@ -154,42 +162,53 @@ function minusUnit(item){
 	}
 }
 
-function incrementPasta(){
-	if(game.selectedRecipe.Pasta <1 && game.selectedRecipe.Water == 10){
-		game.selectedRecipe.Pasta++;
-		$("#pasta").empty();
-		$("#pasta").html("Pasta Cooked");
-		$("#pasta-button").hide();
+//STOVE
+function toggleStove(){
+	if(!game.stove){
+		$('#stove-fire').show();
+		game.stove = true;
+		$('#stove').html("On")
+			.addClass("green")
+			.removeClass("darkred");
+		boilWater();
+	} else {
+		$('#stove-fire').hide();
+		game.stove = false;
+		$('#stove').html("Off")
+			.addClass("darkred")
+			.removeClass("green");
 	}
 }
-
-
-function incrementMilk(){
-	if(game.selectedRecipe.Milk <1){
-		game.selectedRecipe.Milk++;
-		$("#milk-button").hide();
+//SINK
+function toggleSink(){
+	if(!game.sink){
+		game.sink = true;
+		$("#sink-water").show();
+		//update button
+		$("#sink").html("On")
+			.addClass("green")
+			.removeClass("darkred");
+		fillWater();
+	} else {
+		game.sink = false;
+		$("#sink-water").hide();
+		//update button
+		$("#sink").html("Off")
+			.addClass("darkred")
+			.removeClass("green");
 	}
 }
 
 function boilWater(){
 	if(game.selectedRecipe.Water < 10){
 		setTimeout(function(){
-		if(game.stopBoiling == false){
-			$("#boil-button").html("Stove On");
-			incrementWater();
+		if(game.stove == true){
+			updateWaterUi();
 		}
 	}, 1000);
 	} else {
-		$("#water").html("Water </br> Boiled!");
 		$("#boil-button").html("Stove Off");
 	}
-}
-
-function incrementWater(){
-	game.selectedRecipe.Water++;
-	$("#water").empty();
-	$("#water").html("Water <br/> Boiling");
-	boilWater();
 }
 
 function validate(){
@@ -202,7 +221,6 @@ function validate(){
 		$("#level-screen").html("Level Complete!");
 	} else{
 		$("#level-screen").show();
-		$("#level-screen").html("Failed- Try your recipe again");
-
+		$("#level-message").html("Failed- Try your recipe again");
 	}
 }
